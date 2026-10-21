@@ -1,0 +1,159 @@
+        :root { --page-bg: #f3f7f4; --surface: transparent; --content-bg: #ffffff; --text: #263238; --heading: #173b2b; --muted: #4b5f55; --panel-bg: #ffffff; --control-bg: #f7faf8; --border: rgba(35, 75, 52, .2); --soft-surface: rgba(255, 255, 255, .78); color-scheme: light; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        html { background-color: var(--page-bg); }
+        body { min-height: 100vh; background-color: var(--page-bg); background-image: url("islamic-pattern.png"); background-repeat: repeat; background-size: 473px 699px; background-attachment: fixed; background-blend-mode: multiply; color: var(--text); padding: 20px; text-align: center; }
+        body { background-image: linear-gradient(rgba(247, 250, 248, .82), rgba(234, 242, 237, .82)), url("islamic-pattern.png"); background-repeat: repeat; background-size: auto, 473px 699px; background-attachment: fixed; background-blend-mode: normal, multiply; }
+        .container { position: relative; max-width: 1100px; margin: 0 auto; background: var(--surface); padding: 24px 32px 32px; border-radius: 20px; box-shadow: 0 4px 25px rgba(0,0,0,0.16); }
+        body[data-current-page="home"] .container { width: 100%; max-width: none; min-height: calc(100vh - 40px); min-height: calc(100dvh - 40px); display: flex; flex-direction: column; }
+        .top-bar { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 190px; margin-bottom: 24px; padding: 30px 76px 24px; border: 1px solid var(--border); border-radius: 22px; background: linear-gradient(135deg, rgba(2, 119, 189, .18), rgba(46, 125, 50, .13)); }
+        .settings-toggle, .saved-toggle { position: absolute; top: 18px; display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid rgba(144, 202, 249, .3); border-radius: 50%; background: rgba(255, 255, 255, .08); color: var(--heading); cursor: pointer; transition: transform .2s, background .2s; }
+        .settings-toggle { inset-inline-start: 18px; font-size: 25px; }
+        .saved-toggle { inset-inline-end: 18px; font-size: 21px; }
+        .settings-toggle:hover, .saved-toggle:hover { background: rgba(2, 119, 189, .35); }
+        .settings-toggle:hover, .saved-toggle:hover { transform: scale(1.08); }
+        .quick-home { position: fixed; z-index: 8; inset-inline-end: 22px; bottom: 22px; display: none; align-items: center; gap: 8px; min-height: 46px; padding: 8px 16px; border: 0; border-radius: 999px; background: #0277bd; color: #fff; box-shadow: 0 5px 18px rgba(0, 0, 0, .3); cursor: pointer; font-size: 15px; font-weight: bold; }
+        .quick-home span:first-child { font-size: 22px; line-height: 1; }
+        body:not([data-current-page="home"]) .quick-home { display: flex; }
+        .quick-home:hover { background: #01579b; }
+        .quick-home:focus-visible { outline: 3px solid var(--heading); outline-offset: 3px; }
+        .settings-panel { position: absolute; z-index: 5; top: 92px; inset-inline-start: 16px; width: min(290px, calc(100vw - 52px)); padding: 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--panel-bg); box-shadow: 0 8px 24px rgba(0, 0, 0, .25); text-align: start; }
+        .settings-panel[hidden] { display: none; }
+        .settings-panel h2 { margin-bottom: 14px; color: var(--heading); font-size: 18px; }
+        .setting-row { display: flex; flex-direction: column; align-items: stretch; gap: 8px; margin-top: 14px; color: var(--text); font-size: 15px; }
+        .font-controls { display: flex; gap: 8px; }
+        .font-controls button, .setting-row select { min-width: 40px; min-height: 36px; border: 1px solid var(--border); border-radius: 8px; background: var(--control-bg); color: var(--text); cursor: pointer; }
+        .font-controls button { font-size: 20px; }
+        .setting-row select { width: 100%; padding: 6px 10px; }
+        h1 { color: var(--heading); margin-bottom: 10px; font-size: clamp(26px, 3vw, 36px); }
+        .system-clock { padding: 10px 16px; border-radius: 999px; background: rgba(0, 0, 0, .18); color: var(--heading); font-weight: 700; font-size: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(calc(132px * var(--font-scale)), 1fr)); flex: 1; gap: clamp(12px, 1.5vw, 22px); margin-bottom: 25px; padding: 18px; border: 1px solid var(--border); border-radius: 22px; background: var(--soft-surface); }
+        .grid[hidden], .content-page[hidden] { display: none; }
+        .card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%; min-width: 0; min-height: calc(132px * var(--font-scale)); border: 1px solid rgba(144, 202, 249, .2); background: linear-gradient(145deg, rgba(46, 125, 50, .92), rgba(27, 94, 32, .88)); color: white; padding: 14px 10px; border-radius: 18px; cursor: pointer; transition: transform .22s, background .22s, box-shadow .22s; font-weight: bold; font-size: 15px; line-height: 1.5; }
+        .card:hover, .card:focus-visible { transform: scale(1.045); background: #1b5e20; box-shadow: 0 8px 20px rgba(0, 0, 0, .25); }
+        .card:focus-visible { outline: 2px solid var(--heading); outline-offset: 3px; }
+        .card-icon { display: block; font-size: 38px; line-height: 1.2; transition: transform .22s; }
+        .card:hover .card-icon, .card:focus-visible .card-icon { transform: scale(1.12); }
+        .card-label { display: block; }
+        .content-page:not([hidden]) { animation: reveal-content .28s ease-out; }
+        @keyframes reveal-content { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: scale(1); } }
+        @media (max-width: 720px) {
+            .container { padding: 16px 18px 22px; }
+            .top-bar { min-height: 168px; padding: 28px 66px 20px; }
+            .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(calc(120px * var(--font-scale)), 1fr)); gap: 12px; padding: 14px; }
+            .card { min-height: calc(120px * var(--font-scale)); }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 10px 10px 18px; }
+            .top-bar { min-height: 150px; margin-bottom: 16px; padding: 24px 48px 18px; border-radius: 16px; }
+            .settings-toggle, .saved-toggle { top: 12px; width: 40px; height: 40px; }
+            .settings-toggle { inset-inline-start: 10px; font-size: 21px; }
+            .saved-toggle { inset-inline-end: 10px; font-size: 18px; }
+            .system-clock { max-width: 100%; padding: 8px 12px; font-size: 12px; }
+            h1 { font-size: calc(22px * var(--font-scale)); }
+            .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(calc(112px * var(--font-scale)), 1fr)); gap: 12px; padding: 10px; }
+            .card { min-height: calc(112px * var(--font-scale)); padding: 10px 8px; font-size: calc(13px * var(--font-scale)); }
+            .card-icon { font-size: 32px; }
+            .book-filters { grid-template-columns: 1fr; gap: 6px; }
+            .book-filters label:not(:first-child) { margin-top: 8px; }
+            .library-book-list { grid-template-columns: 1fr; }
+            .book-search { padding: 13px; }
+            .book-search-controls { gap: 6px; }
+            .book-search button { padding: 10px 12px; }
+            .book-pagination { gap: 8px; }
+            .book-pagination button { padding: 9px 12px; }
+            .book-reader-toolbar { align-items: stretch; }
+            .book-reader-toolbar select, .book-reader-toolbar input { flex: 1; }
+            .book-reader-content { padding: 16px; font-size: calc(17px * var(--font-scale)); }
+            .book-reader-pagination { gap: 8px; }
+            .quick-home { inset-inline-end: 12px; bottom: 12px; min-height: 44px; padding: 7px 13px; }
+        }
+        .content-page { position: relative; padding-top: 42px; }
+        .home-arrow { position: absolute; top: 0; right: 0; width: 38px; height: 38px; border: 0; border-radius: 50%; background: #0277bd; color: #fff; cursor: pointer; font-size: 25px; line-height: 1; }
+        .home-arrow:hover { background: #01579b; }
+        .content-box { background: var(--content-bg); border-right: 4px solid #2e7d32; padding: 15px; border-radius: 8px; text-align: right; min-height: 120px; line-height: 1.8; }
+        .content-page h2 { color: var(--heading); margin-bottom: 14px; font-size: 21px; }
+        .item-number { margin-bottom: 10px; color: var(--muted); font-size: 14px; font-weight: bold; }
+        .content-navigation { display: flex; justify-content: space-between; margin-top: 18px; }
+        .content-navigation[hidden] { display: none; }
+        .content-navigation button { min-width: 110px; border: 0; border-radius: 8px; padding: 11px 18px; color: #fff; background: #2e7d32; cursor: pointer; font-size: 16px; font-weight: bold; }
+        .content-navigation button:hover { background: #1b5e20; }
+        .content-page.dhikr-page { padding-top: 48px; }
+        .content-page.dhikr-page .content-box, .saved-page .content-box { min-height: 0; padding: 0; border: 0; }
+        .dhikr-list { display: grid; gap: 14px; }
+        .dhikr-card { position: relative; padding: 18px; border: 1px solid var(--border); border-radius: 12px; background: var(--soft-surface); }
+        .duaa-category-filter { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--soft-surface); text-align: start; }
+        .duaa-category-filter label { color: var(--heading); font-weight: bold; }
+        .duaa-category-filter select { flex: 1; min-width: 0; min-height: 44px; border: 1px solid var(--border); border-radius: 9px; padding: 8px 12px; background: var(--control-bg); color: var(--text); font-size: calc(15px * var(--font-scale)); }
+        .dua-card { display: flex; flex-direction: column; }
+        .dua-card .repeat-control { align-self: flex-end; direction: ltr; margin-top: auto; }
+        .dua-card .repeat-control button { direction: rtl; }
+        @media (max-width: 480px) { .duaa-category-filter { align-items: stretch; flex-direction: column; gap: 8px; } }
+        .dhikr-card-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+        .dhikr-number { display: grid; place-items: center; flex: 0 0 30px; width: 30px; height: 30px; border-radius: 50%; background: #0277bd; color: #fff; font-size: 14px; font-weight: bold; }
+        .save-content-button { border: 1px solid rgba(144, 202, 249, .3); border-radius: 8px; padding: 7px 10px; background: rgba(255, 255, 255, .06); color: var(--heading); cursor: pointer; font-size: calc(13px * var(--font-scale)); }
+        .save-content-button:hover { background: rgba(2, 119, 189, .35); }
+        .saved-section-label { display: block; margin-bottom: 8px; color: var(--muted); font-size: calc(13px * var(--font-scale)); font-weight: bold; }
+        .saved-empty { padding: 24px 14px; border: 1px dashed rgba(144, 202, 249, .3); border-radius: 12px; color: var(--muted); }
+        .book-search { margin-bottom: 16px; padding: 18px; border: 1px solid var(--border); border-radius: 16px; background: var(--soft-surface); text-align: start; }
+        .book-search > label, .book-filters label { display: block; color: var(--heading); font-weight: bold; }
+        .book-search > label { margin-bottom: 10px; }
+        .book-search-controls { display: flex; gap: 10px; }
+        .book-search input, .book-filters select { min-height: 44px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; background: var(--control-bg); color: var(--text); font-size: calc(15px * var(--font-scale)); }
+        .book-search input { flex: 1; min-width: 0; }
+        .book-search button, .book-pagination button { border: 0; border-radius: 10px; padding: 10px 18px; background: #0277bd; color: #fff; cursor: pointer; font-size: calc(15px * var(--font-scale)); font-weight: bold; }
+        .book-search button:hover, .book-pagination button:hover:not(:disabled) { background: #01579b; }
+        .book-filters { display: grid; grid-template-columns: auto minmax(150px, 1fr) auto minmax(160px, 1fr); align-items: center; gap: 10px; margin-top: 14px; }
+        .book-filters select { width: 100%; }
+        .book-search-note { margin-top: 10px; color: var(--muted); font-size: calc(13px * var(--font-scale)); line-height: 1.6; }
+        .book-results-status { min-height: 28px; margin: 10px 2px; color: var(--muted); font-size: calc(14px * var(--font-scale)); text-align: start; }
+        .library-book-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .library-book-card { padding: 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--soft-surface); text-align: start; }
+        .library-book-card h3 { margin-bottom: 12px; color: var(--heading); font-size: calc(17px * var(--font-scale)); line-height: 1.6; }
+        .library-book-meta { display: grid; gap: 6px; color: var(--text); font-size: calc(14px * var(--font-scale)); line-height: 1.6; }
+        .library-book-meta strong { color: var(--muted); }
+        .library-book-read { display: inline-block; margin-top: 14px; border: 0; border-radius: 9px; padding: 9px 14px; background: #2e7d32; color: #fff; cursor: pointer; font-size: calc(14px * var(--font-scale)); font-weight: bold; text-decoration: none; }
+        .library-book-read:hover, .library-book-read:focus-visible { background: #1b5e20; }
+        .library-book-read:focus-visible { outline: 2px solid var(--heading); outline-offset: 2px; }
+        .book-pagination { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 18px; }
+        .book-pagination[hidden] { display: none; }
+        .book-pagination button:disabled { opacity: .5; cursor: default; }
+        #bookPageStatus { color: var(--muted); font-weight: bold; }
+        .dhikr-text { color: var(--text); font-size: 18px; line-height: 2; direction: rtl; text-align: right; }
+        .dua-title { display: block; margin: 8px 0; color: var(--heading); font-size: calc(16px * var(--font-scale)); text-align: right; }
+        .dhikr-translation { margin-top: 8px; color: var(--heading); font-size: calc(16px * var(--font-scale)); line-height: 1.8; direction: ltr; text-align: left; }
+        .dhikr-card .repeat-control { flex-wrap: wrap; }
+        .content-page.names-page .content-box { min-height: 0; padding: 0; border: 0; }
+        .name-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+        .name-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 84px; padding: 10px; border: 1px solid var(--border); border-radius: 12px; background: var(--soft-surface); color: var(--text); font-size: 17px; font-weight: bold; }
+        .name-number { color: var(--muted); font-size: 12px; }
+        .hadith-tag { font-size: 12px; color: #1565c0; font-weight: bold; display: block; margin-bottom: 5px; }
+        .source-tag { font-size: 13px; color: var(--muted); display: block; margin-top: 8px; }
+        .azkar-count { display: block; margin-top: 6px; color: #1565c0; font-size: 13px; font-weight: bold; }
+        .repeat-control { display: flex; align-items: center; gap: 10px; margin-top: 14px; color: var(--muted); }
+        .repeat-control strong { min-width: 30px; color: var(--heading); font-size: 18px; }
+        .repeat-control button { border: 0; border-radius: 8px; padding: 8px 12px; background: #0277bd; color: #fff; cursor: pointer; font-size: 14px; }
+        .repeat-control button:hover:not(:disabled) { background: #01579b; }
+        .repeat-control button:disabled { background: #536878; cursor: default; }
+        .dorar-link { display: block; margin-top: 6px; color: #0277bd; font-size: 13px; }
+        :root { --font-scale: 1; }
+        body { font-size: calc(16px * var(--font-scale)); }
+        h1 { font-size: calc(24px * var(--font-scale)); }
+        .system-clock { font-size: calc(15px * var(--font-scale)); }
+        @media (min-width: 481px) { .card { font-size: calc(16px * var(--font-scale)); } }
+        .content-box, .dhikr-text { font-size: calc(18px * var(--font-scale)); }
+        .content-page h2 { font-size: calc(21px * var(--font-scale)); }
+        .content-navigation button { font-size: calc(16px * var(--font-scale)); }
+        .name-card { font-size: calc(17px * var(--font-scale)); }
+        .repeat-control button, .setting-row { font-size: calc(14px * var(--font-scale)); }
+        .settings-panel h2, .repeat-control strong { font-size: calc(18px * var(--font-scale)); }
+        .item-number, .dhikr-number { font-size: calc(14px * var(--font-scale)); }
+        .name-number { font-size: calc(12px * var(--font-scale)); }
+        .hadith-tag { font-size: calc(12px * var(--font-scale)); }
+        .source-tag, .azkar-count, .dorar-link { font-size: calc(13px * var(--font-scale)); }
+        html[lang="en"] .card { font-size: calc(14px * var(--font-scale)); overflow-wrap: anywhere; }
+        html[dir="ltr"] body { text-align: center; }
+        html[dir="ltr"] .content-box { border-right: 0; border-left: 4px solid #2e7d32; text-align: left; }
+        html[dir="ltr"] .dhikr-card { text-align: left; }
+        html[dir="ltr"] .dhikr-number { margin-left: auto; margin-right: 0; }
+        html[dir="ltr"] .settings-panel { text-align: left; }
+        @media (max-width: 480px) { .book-filters { grid-template-columns: minmax(0, 1fr); } .book-filters select { min-width: 0; } }
