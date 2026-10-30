@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ديني</title>
+    <link rel="stylesheet" href="index.css?v=33">
+</head>
+<body>
+
+<div class="container">
+    <header class="top-bar">
+        <button type="button" class="settings-toggle" id="settingsToggle" aria-expanded="false" aria-controls="settingsPanel" aria-label="فتح الإعدادات">⚙</button>
+        <button type="button" class="saved-toggle" id="savedToggle" aria-label="المحفوظات" title="المحفوظات">🔖</button>
+        <h1>🕌 ديني</h1>
+        <div class="system-clock" id="systemClock" aria-live="polite">الوقت الحالي</div>
+    </header>
+    <section class="settings-panel" id="settingsPanel" hidden aria-labelledby="settingsTitle">
+        <h2 id="settingsTitle">الإعدادات</h2>
+        <div class="setting-row">
+            <span id="fontSizeLabel">حجم الخط</span>
+            <div class="font-controls" aria-label="التحكم بحجم الخط">
+                <button type="button" id="decreaseFont" aria-label="تصغير الخط">−</button>
+                <button type="button" id="increaseFont" aria-label="تكبير الخط">+</button>
+            </div>
+        </div>
+        <label class="setting-row" for="languageSelect">
+            <span id="languageLabel">اللغة</span>
+            <select id="languageSelect">
+                <option value="ar">العربية</option>
+                <option value="en">English</option>
+            </select>
+        </label>
+    </section>
+    <section class="content-page saved-page" id="savedPage" hidden aria-live="polite">
+        <button type="button" class="home-arrow" id="savedHomeArrow" aria-label="العودة إلى الصفحة الرئيسية" title="الصفحة الرئيسية">→</button>
+        <h2 id="savedTitle">المحفوظات</h2>
+        <div class="content-box" id="savedDisplayBox"></div>
+    </section>
+    <section class="content-page books-page" id="booksPage" hidden aria-labelledby="booksTitle">
+        <button type="button" class="home-arrow" id="booksHomeArrow" aria-label="العودة إلى الصفحة الرئيسية" title="الصفحة الرئيسية">→</button>
+        <h2 id="booksTitle">المكتبة الإسلامية</h2>
+        <form class="book-search" id="bookSearchForm">
+            <label for="bookSearchInput" id="bookSearchLabel">ابحث في عناوين الكتب</label>
+            <div class="book-search-controls">
+                <input id="bookSearchInput" type="search" autocomplete="off">
+                <button type="submit" id="bookSearchButton">بحث</button>
+            </div>
+            <div class="book-filters">
+                <label for="bookCategoryFilter" id="bookCategoryLabel">التصنيف</label>
+                <select id="bookCategoryFilter">
+                    <option value="all">كل الأقسام الإسلامية</option>
+                    <option value="tafsir">التفسير وعلوم القرآن</option>
+                    <option value="hadith">الحديث</option>
+                    <option value="fiqh">الفقه والأحكام</option>
+                    <option value="culture">الثقافة الإسلامية</option>
+                </select>
+                <label for="bookSortSelect" id="bookSortLabel">ترتيب النتائج</label>
+                <select id="bookSortSelect">
+                    <option value="created_at:DESC">الأحدث</option>
+                    <option value="title:ASC">العنوان: أ إلى ي</option>
+                    <option value="title:DESC">العنوان: ي إلى أ</option>
+                    <option value="pages_count:DESC">عدد الصفحات: الأكثر</option>
+                    <option value="pages_count:ASC">عدد الصفحات: الأقل</option>
+                </select>
+            </div>
+            <p class="book-search-note" id="bookSearchNote">افتح صفحة الكتاب في موقع كتاب أونلاين لقراءته.</p>
+        </form>
+        <div class="book-results-status" id="bookResultsStatus" role="status" aria-live="polite"></div>
+        <div class="library-book-list" id="libraryBookList"></div>
+        <nav class="book-pagination" id="bookPagination" aria-label="التنقل بين صفحات الكتب" hidden>
+            <button type="button" id="previousBooksPage">السابق</button>
+            <span id="bookPageStatus"></span>
+            <button type="button" id="nextBooksPage">التالي</button>
+        </nav>
+    </section>
+    <div class="grid" id="homeScreen">
+        <button class="card" data-section="duaa"><span class="card-icon" aria-hidden="true">🤲</span><span class="card-label">أدعية</span></button>
+        <button class="card" data-section="dailyDua"><span class="card-icon" aria-hidden="true">🌿</span><span class="card-label">دعاء اليوم</span></button>
+        <button class="card" data-section="quran"><span class="card-icon" aria-hidden="true">📖</span><span class="card-label">القرآن الكريم</span></button>
+        <button class="card" data-section="azkar"><span class="card-icon" aria-hidden="true">📿</span><span class="card-label">أذكار</span></button>
+        <button class="card" data-section="morningAzkar"><span class="card-icon" aria-hidden="true">🌅</span><span class="card-label">أذكار الصباح</span></button>
+        <button class="card" data-section="eveningAzkar"><span class="card-icon" aria-hidden="true">🌙</span><span class="card-label">أذكار المساء</span></button>
+        <button class="card" data-section="prayerAzkar"><span class="card-icon" aria-hidden="true">🕌</span><span class="card-label">أذكار الصلاة</span></button>
+        <button class="card" data-section="afterPrayerAzkar"><span class="card-icon" aria-hidden="true">📿</span><span class="card-label">أذكار بعد الصلاة</span></button>
+        <button class="card" data-section="sleepAzkar"><span class="card-icon" aria-hidden="true">🌙</span><span class="card-label">أذكار النوم</span></button>
+        <button class="card" data-section="wakingAzkar"><span class="card-icon" aria-hidden="true">🌅</span><span class="card-label">أذكار الاستيقاظ</span></button>
+        <button class="card" data-section="namesAllah"><span class="card-icon" aria-hidden="true">✨</span><span class="card-label">أسماء الله الحسنى</span></button>
+        <button class="card" data-section="sahihayn"><span class="card-icon" aria-hidden="true">📚</span><span class="card-label">المكتبة</span></button>
+    </div>
+
+    <section class="content-page" id="contentPage" hidden aria-live="polite">
+        <button type="button" class="home-arrow" id="homeArrow" aria-label="العودة إلى الصفحة الرئيسية" title="الصفحة الرئيسية">→</button>
+        <h2 id="sectionTitle"></h2>
+        <div class="item-number" id="itemNumber" aria-live="polite"></div>
+        <div class="content-box" id="displayBox"></div>
+        <nav class="content-navigation" aria-label="التنقل بين المحتوى">
+            <button type="button" id="backButton">الرجوع</button>
+            <button type="button" id="nextButton">التالي</button>
+        </nav>
+    </div>
+</div>
+<button type="button" class="quick-home" id="quickHomeButton" aria-label="العودة إلى الأقسام الرئيسية" title="العودة إلى الأقسام الرئيسية">
+    <span aria-hidden="true">⌂</span>
+    <span id="quickHomeLabel">الأقسام</span>
+</button>
+
+<script src="index.js?v=21"></script>
+<script type="module" src="quran-reader.js?v=1"></script>
+
+</body>
+</html>
